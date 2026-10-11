@@ -1,5 +1,5 @@
 import requests
-
+from configs.settings import BASE_URL
 
 def test_verify_public_demo_stats_endpoint():
     """
@@ -19,7 +19,7 @@ Example response body:
     }
     """
     # make the call to the public demo stats endpoint
-    url = "http://127.0.0.1:3050/api/v1/public/demo-stats"
+    url = f"{BASE_URL}/api/v1/public/demo-stats"
     response = requests.get(url)
 
     # verify the status code
