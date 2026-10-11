@@ -1,7 +1,7 @@
 from xmlrpc.client import DateTime
 
 import requests
-
+from configs.settings import BASE_URL
 
 def test_verify_public_status_endpoint():
     """
@@ -14,7 +14,7 @@ def test_verify_public_status_endpoint():
     }
     """
     # make the call to the public status endpoint
-    url = "http://127.0.0.1:3050/api/v1/public/status"
+    url = f"{BASE_URL}/api/v1/public/status"
     response = requests.get(url)
 
     # verify the status code
