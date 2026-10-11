@@ -16,9 +16,11 @@ def test_verify_public_status_endpoint():
     # make the call to the public status endpoint
     url = "http://127.0.0.1:3050/api/v1/public/status"
     response = requests.get(url)
+
     # verify the status code
     status_code = response.status_code
     assert status_code == 200, f"Expected status code 200, but got {status_code}"
+
     # verify the body of the response
     response_body = response.json()
 
