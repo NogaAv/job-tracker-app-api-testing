@@ -3,19 +3,7 @@ from clients.api_client import APIClient
 
 
 def test_verify_authenticated_user_can_access_application_summary():
-    """
-    Example response body for the applications summary api:
-    {
-      "potential": 2,
-      "applied": 1,
-      "in_progress": 1,
-      "final_stage": 0,
-      "hired": 0,
-      "rejected": 0,
-      "withdrawn": 0,
-      "total": 4
-    }
-    """
+    """Verify the authenticated applications summary response has valid totals."""
 
     # make the call with the JWT token in header
     applications_summary_endpoint = f"/api/v1/applications/summary"

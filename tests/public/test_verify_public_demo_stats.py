@@ -6,22 +6,7 @@ from tests.auth.test_verify_login import api_client
 
 
 def test_verify_public_demo_stats_endpoint():
-    """
-Example response body:
-    {
-      "total_seeded_applications": 4,
-      "status_counts": {
-        "potential": 2,
-        "applied": 1,
-        "in_progress": 1,
-        "final_stage": 0,
-        "hired": 0,
-        "rejected": 0,
-        "withdrawn": 0,
-        "total": 4
-      }
-    }
-    """
+    """Verify the public demo stats endpoint returns seeded totals and status counts."""
     # make the call to the public demo stats endpoint
     endpoint = f"/api/v1/public/demo-stats"
     api_client = APIClient(authenticated=False)

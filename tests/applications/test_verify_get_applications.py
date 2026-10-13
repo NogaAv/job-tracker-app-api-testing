@@ -2,9 +2,7 @@ from clients.api_client import APIClient
 
 
 def test_verify_authenticated_user_can_get_applications():
-    """
-    verify an authenticated user can retrieve the applications list
-    """
+    """Verify an authenticated user can retrieve the applications list."""
     # make the api call with the token in the header
     get_applications_endpoint = f"/api/v1/applications"
     api_client = APIClient()
