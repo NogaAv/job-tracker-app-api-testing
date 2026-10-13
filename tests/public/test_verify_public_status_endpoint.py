@@ -1,6 +1,8 @@
 from xmlrpc.client import DateTime
 
 import requests
+
+from clients.api_client import APIClient
 from configs.settings import BASE_URL
 
 def test_verify_public_status_endpoint():
@@ -14,15 +16,10 @@ def test_verify_public_status_endpoint():
     }
     """
     # make the call to the public status endpoint
-    url = f"{BASE_URL}/api/v1/public/status"
-    response = requests.get(url)
+    endpoint = f"/api/v1/public/status"
+    api_client = APIClient(authenticated=False)
 
-    # verify the status code
-    status_code = response.status_code
-    assert status_code == 200, f"Expected status code 200, but got {status_code}"
-
-    # verify the body of the response
-    response_body = response.json()
+    response_body = api_client.get_json(endpoint)
 
     assert "app_name" in response_body
     assert response_body["app_name"] == "SuperSQA Job Tracker"

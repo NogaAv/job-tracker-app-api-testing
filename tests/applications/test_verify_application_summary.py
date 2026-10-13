@@ -1,7 +1,5 @@
 
 from clients.api_client import APIClient
-from configs.settings import BASE_URL
-from helpers.auth_helper import login_user
 
 
 def test_verify_authenticated_user_can_access_application_summary():
@@ -20,12 +18,12 @@ def test_verify_authenticated_user_can_access_application_summary():
     """
 
     # make the call with the JWT token in header
-    applications_summary_url = f"{BASE_URL}/api/v1/applications/summary"
+    applications_summary_endpoint = f"/api/v1/applications/summary"
     api_client = APIClient()
-    response_body = api_client.get_json(applications_summary_url)
+    response_body = api_client.get_json(applications_summary_endpoint)
 
     # verify the api response body
-    assert response_body, f"GET applications summary api response body is empty. Endpoint: {applications_summary_url}"
+    assert response_body, f"GET applications summary api response body is empty. Endpoint: {applications_summary_endpoint}"
     assert len(response_body.keys()) > 0, f"Expected a dictionary with keys, but got {type(response_body)}"
 
     assert isinstance(response_body["potential"], int), f"Expected integer, but got {type(response_body['potential'])}"

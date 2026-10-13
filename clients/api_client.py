@@ -16,7 +16,7 @@ class APIClient:
 
 
     def login(self, email, password):
-        login_url = f"{BASE_URL}/api/v1/auth/login"
+        login_url = f"/api/v1/auth/login"
         payload = {
             "email": email,
             "password": password
@@ -29,8 +29,9 @@ class APIClient:
 
     def get(self, endpoint, headers=None, expected_status_code=200):
         headers = self.build_headers(headers)
-        response = requests.get(endpoint, headers=headers)
-        self.verify_status_code(response, expected_status_code, endpoint)
+        url = self.build_url(endpoint)
+        response = requests.get(url, headers=headers)
+        self.verify_status_code(response, expected_status_code, url)
         return response
 
     def get_json(self, endpoint, headers=None, expected_status_code=200):
@@ -40,8 +41,9 @@ class APIClient:
 
     def post(self, endpoint, data, headers=None, expected_status_code=200):
         headers = self.build_headers(headers)
-        response = requests.post(endpoint, headers=headers, json=data)
-        self.verify_status_code(response, expected_status_code, endpoint)
+        url = self.build_url(endpoint)
+        response = requests.post(url, headers=headers, json=data)
+        self.verify_status_code(response, expected_status_code, url)
         return response
 
     def post_json(self, endpoint, data, headers=None, expected_status_code=200):
@@ -85,3 +87,12 @@ class APIClient:
         assert response.status_code == expected_status_code, \
             f"Status code. Expected: {expected_status_code}, \
             Actual: {response.status_code}, URL: {endpoint}, Response: {response.content}"
+
+    def build_url(self, endpoint):
+        """
+        Build the full URL for the request.
+
+        Args:
+            endpoint: API path appended to the base URL.
+        """
+        return f"{BASE_URL}{endpoint}"

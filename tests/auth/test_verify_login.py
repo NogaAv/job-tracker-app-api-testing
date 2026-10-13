@@ -1,5 +1,4 @@
 
-from configs.settings import BASE_URL
 from clients.api_client import APIClient
 
 
@@ -28,13 +27,13 @@ def test_verify_user_can_login_with_valid_credentials():
     """
 
     # Make the call
-    url = f"{BASE_URL}/api/v1/auth/login"
+    endpoint = f"/api/v1/auth/login"
     payload = {
         "email": "student@example.com",
         "password": "Password123!"
     }
     # the client will make the call and return the json body of the response
-    response_body = api_client.post_json(url, data=payload)
+    response_body = api_client.post_json(endpoint, data=payload)
 
     # verify the response body
     assert response_body["access_token"], f"Access token is required, but got {response_body['access_token']}"
@@ -64,13 +63,13 @@ def test_verify_user_cannot_login_with_invalid_credentials():
     }
     """
     # Make the call
-    url = f"{BASE_URL}/api/v1/auth/login"
+    endpoint = f"/api/v1/auth/login"
     payload = {
         "email": "student@example.com",
         "password": "BadPassword123!"
     }
 
-    response_body = api_client.post_json(url, data=payload, expected_status_code=401)
+    response_body = api_client.post_json(endpoint, data=payload, expected_status_code=401)
 
     assert isinstance(response_body["error"], dict), "Expected response body to have 'error' dictionary."
     assert response_body["error"]["code"] == "INVALID_CREDENTIALS", f"Expected error code INVALID_CREDENTIALS, but got {response_body['error']['code']}"

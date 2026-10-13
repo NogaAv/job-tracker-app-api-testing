@@ -1,5 +1,9 @@
 import requests
+
+from clients.api_client import APIClient
 from configs.settings import BASE_URL
+from tests.auth.test_verify_login import api_client
+
 
 def test_verify_public_demo_stats_endpoint():
     """
@@ -19,15 +23,10 @@ Example response body:
     }
     """
     # make the call to the public demo stats endpoint
-    url = f"{BASE_URL}/api/v1/public/demo-stats"
-    response = requests.get(url)
+    endpoint = f"/api/v1/public/demo-stats"
+    api_client = APIClient(authenticated=False)
 
-    # verify the status code
-    status_code = response.status_code
-    assert status_code == 200, f"Expected status code 200, but got {status_code}"
-
-    # verify the body of the response
-    response_body = response.json()
+    response_body = api_client.get_json(endpoint)
 
     # verify the number of keys in the response body
     assert len(response_body.keys()) == 2, f"Expected 2 keys in the response body, but got {len(response_body.keys())}"
