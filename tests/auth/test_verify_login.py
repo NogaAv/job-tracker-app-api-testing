@@ -1,41 +1,19 @@
-
 from clients.api_client import APIClient
 
 
 api_client = APIClient()
 
+
 def test_verify_user_can_login_with_valid_credentials():
-    """
-    Verify valid credentials return a bearer token and user profile.
+    """Verify valid credentials return a bearer token and user profile."""
 
-    Example response body:
-    {
-  "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZW1haWwiOiJzdHVkZW50QGV4YW1wbGUuY29tIiwicm9sZSI6InVzZXIiLCJpYXQiOjE3OTE3MDczMzgsImV4cCI6MTc5MTczNjEzOH0._ZGLMLK2G8yHaBtBQlZpcZh9Kb36VFZ9Qc2vQSpFSNY",
-  "token_type": "bearer",
-  "expires_in": 28800,
-  "user": {
-    "id": 1,
-    "email": "student@example.com",
-    "full_name": "SupersQA Student",
-    "role": "user",
-    "is_active": true,
-    "created_at": "2026-08-06T00:01:52",
-    "updated_at": "2026-08-06T00:01:52"
-  }
-}
-
-    """
-
-    # Make the call
-    endpoint = f"/api/v1/auth/login"
+    endpoint = "/api/v1/auth/login"
     payload = {
         "email": "student@example.com",
-        "password": "Password123!"
+        "password": "Password123!",
     }
-    # the client will make the call and return the json body of the response
     response_body = api_client.post_json(endpoint, data=payload)
 
-    # verify the response body
     assert response_body["access_token"], f"Access token is required, but got {response_body['access_token']}"
     assert response_body["token_type"] == "bearer", "Token type is required"
     assert response_body["expires_in"], f"Expires in is required, but got {response_body['expires_in']}"
@@ -50,23 +28,12 @@ def test_verify_user_can_login_with_valid_credentials():
 
 
 def test_verify_user_cannot_login_with_invalid_credentials():
-    """
-    Verify invalid credentials return 401 with an INVALID_CREDENTIALS error.
+    """Verify invalid credentials return a 401 error with the expected payload."""
 
-    Example response body:
-   {
-      "error": {
-        "code": "INVALID_CREDENTIALS",
-        "message": "Invalid email or password",
-        "details": []
-      }
-    }
-    """
-    # Make the call
-    endpoint = f"/api/v1/auth/login"
+    endpoint = "/api/v1/auth/login"
     payload = {
         "email": "student@example.com",
-        "password": "BadPassword123!"
+        "password": "BadPassword123!",
     }
 
     response_body = api_client.post_json(endpoint, data=payload, expected_status_code=401)

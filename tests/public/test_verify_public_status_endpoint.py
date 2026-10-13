@@ -6,15 +6,7 @@ from clients.api_client import APIClient
 from configs.settings import BASE_URL
 
 def test_verify_public_status_endpoint():
-    """
-    Example response body:
-    {
-      "app_name": "SuperSQA Job Tracker",
-      "api_version": "v1",
-      "environment": "local",
-      "server_time": "2026-10-11T04:59:59.467739Z"
-    }
-    """
+    """Verify the public status endpoint exposes the expected app metadata."""
     # make the call to the public status endpoint
     endpoint = f"/api/v1/public/status"
     api_client = APIClient(authenticated=False)
