@@ -1,4 +1,4 @@
-import requests
+from clients.api_client import APIClient
 
 from configs.settings import BASE_URL, DEFAULT_USER_EMAIL, DEFAULT_USER_PASSWORD
 
@@ -12,13 +12,10 @@ def login_user(email=DEFAULT_USER_EMAIL, password=DEFAULT_USER_PASSWORD):
         "password": password
     }
 
-    response = requests.post(login_url, json=payload)
-
-    # verify status code 200
-    assert response.status_code == 200, f"Expected status code 200, but got {response.status_code}"
+    api_client = APIClient()
+    response_body = api_client.post_json(login_url, data=payload)
 
     # verify response body has access token
-    response_body = response.json()
     assert response_body["access_token"], f"Access token is required, but got {response_body['access_token']}"
 
     return response_body["access_token"]

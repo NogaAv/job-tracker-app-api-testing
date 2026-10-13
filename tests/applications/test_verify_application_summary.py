@@ -1,5 +1,5 @@
-import requests
 
+from clients.api_client import APIClient
 from configs.settings import BASE_URL
 from helpers.auth_helper import login_user
 
@@ -18,22 +18,13 @@ def test_verify_authenticated_user_can_access_application_summary():
       "total": 4
     }
     """
-    # login and get the JWT token
-    # Make the call
-    token = login_user()
 
     # make the call with the JWT token in header
     applications_summary_url = f"{BASE_URL}/api/v1/applications/summary"
-    headers = {
-        "Authorization": f"Bearer {token}"
-    }
-    response = requests.get(applications_summary_url, headers=headers)
-
-    # verify the api status code
-    assert response.status_code == 200, f"GET applications summary api response expected to have status code 200, but got {response.status_code}. Endpoint: {applications_summary_url}"
+    api_client = APIClient()
+    response_body = api_client.get_json(applications_summary_url)
 
     # verify the api response body
-    response_body = response.json()
     assert response_body, f"GET applications summary api response body is empty. Endpoint: {applications_summary_url}"
     assert len(response_body.keys()) > 0, f"Expected a dictionary with keys, but got {type(response_body)}"
 
