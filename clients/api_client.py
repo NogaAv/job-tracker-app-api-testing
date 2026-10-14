@@ -138,8 +138,8 @@ class APIClient:
         response = self.post(endpoint, data, headers=headers, expected_status_code=expected_status_code)
         return response.json()
 
-    def put(self, endpoint, data):
-        """Send a PUT request.
+    def patch(self, endpoint, data, headers=None, expected_status_code=200):
+        """Send a PATCH request.
 
         Args:
             endpoint: API path to update.
@@ -148,8 +148,28 @@ class APIClient:
         Note:
             This method is still a stub and requires implementation.
         """
-        # Implement PUT request logic here
-        pass
+        headers = self.build_headers(headers)
+        url = self.build_url(endpoint)
+        logger.debug("PATCH %s (expecting %s)", url, expected_status_code)
+        response = requests.patch(url, json=data, headers=headers)
+        logger.info("PATCH %s -> %s", url, response.status_code)
+        self.verify_status_code(response, expected_status_code, url)
+        return response
+
+    def patch_json(self, endpoint, data, headers=None, expected_status_code=200):
+        """Send a PATCH request and parse the JSON response body.
+
+        Args:
+            endpoint: API path to update.
+            data: JSON payload to send with the request.
+            headers: Additional headers to merge into the request.
+            expected_status_code: Expected HTTP status code for the response.
+
+        Returns:
+            The parsed JSON payload from the API response.
+        """
+        response = self.patch(endpoint, data, headers=headers, expected_status_code=expected_status_code)
+        return response.json()
 
     def delete(self, endpoint, expected_status_code=204):
         """Send a DELETE request.
