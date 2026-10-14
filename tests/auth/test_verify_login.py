@@ -12,7 +12,7 @@ def test_verify_user_can_login_with_valid_credentials():
         "email": "student@example.com",
         "password": "Password123!",
     }
-    response_body = api_client.post_json(endpoint, data=payload)
+    response_body = api_client.post_json(endpoint, data=payload, expected_status_code=200)
 
     assert response_body["access_token"], f"Access token is required, but got {response_body['access_token']}"
     assert response_body["token_type"] == "bearer", "Token type is required"

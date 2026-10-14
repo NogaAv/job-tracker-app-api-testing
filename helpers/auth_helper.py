@@ -13,7 +13,7 @@ def login_user(email=DEFAULT_USER_EMAIL, password=DEFAULT_USER_PASSWORD):
     }
 
     api_client = APIClient()
-    response_body = api_client.post_json(login_endpoint, data=payload)
+    response_body = api_client.post_json(login_endpoint, data=payload, expected_status_code=200)
 
     # verify response body has access token
     assert response_body["access_token"], f"Access token is required, but got {response_body['access_token']}"
