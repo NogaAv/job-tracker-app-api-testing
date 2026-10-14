@@ -32,8 +32,6 @@ class APIClient:
             password: Password used for authentication.
         """
         self.authenticated = authenticated
-        self.email = email
-        self.password = password
         self.headers = {}
 
         logger.debug("Initializing APIClient for email=%s authenticated=%s", email, authenticated)
@@ -65,7 +63,7 @@ class APIClient:
 
         logger.info("Logging in user %s", email)
         logger.debug("POST %s for email=%s", login_url, email)
-        response_body = self.post_json(login_url, data=payload)
+        response_body = self.post_json(login_url, data=payload, expected_status_code=200)
         assert response_body["access_token"], (
             f"Access token is required, but got {response_body['access_token']}"
         )
@@ -105,7 +103,7 @@ class APIClient:
         response = self.get(endpoint, headers, expected_status_code)
         return response.json()
 
-    def post(self, endpoint, data, headers=None, expected_status_code=200):
+    def post(self, endpoint, data, headers=None, expected_status_code=201):
         """Send an HTTP POST request with a JSON body.
 
         Args:
@@ -124,7 +122,7 @@ class APIClient:
         self.verify_status_code(response, expected_status_code, url)
         return response
 
-    def post_json(self, endpoint, data, headers=None, expected_status_code=200):
+    def post_json(self, endpoint, data, headers=None, expected_status_code=201):
         """Send a POST request and parse the JSON response body.
 
         Args:
@@ -153,17 +151,21 @@ class APIClient:
         # Implement PUT request logic here
         pass
 
-    def delete(self, endpoint):
+    def delete(self, endpoint, expected_status_code=204):
         """Send a DELETE request.
 
         Args:
             endpoint: API path to delete.
+            expected_status_code: Expected HTTP status code for the response.
 
         Note:
             This method is still a stub and requires implementation.
         """
-        # Implement DELETE request logic here
-        pass
+        headers = self.build_headers()
+        url = self.build_url(endpoint)
+        logger.debug("DELETE %s", url)
+        response = requests.delete(url, headers=headers)
+        self.verify_status_code(response, expected_status_code, url)
 
     def build_headers(self, headers=None):
         """Build request headers including the auth token when present.
