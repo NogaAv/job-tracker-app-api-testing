@@ -34,7 +34,7 @@ def test_verify_create_application_writes_to_audit_logs():
     audit_log_rows = sql_client.execute_query(query)
 
     assert audit_log_rows, f"Expected rows in audit log for application id: {application_id}"
-    audit_log = audit_log_rows[0]
+    audit_log = audit_log_rows[0] # selecting the first row for verification, which is the last created log entry
     assert audit_log["application_id"] == application_id
     assert audit_log["action"] == "created"
     assert audit_log["user_id"]
