@@ -55,7 +55,7 @@ class SQLClient:
         self.connection.row_factory = sqlite3.Row
         cursor = self.connection.cursor()
         cursor.execute(query)
-        rows = cursor.fetchall()
+        rows = cursor.fetchall() # returns a list of sqlite3.Row objects, which can be converted to dicts
         cursor.close()
         self._close()
 
