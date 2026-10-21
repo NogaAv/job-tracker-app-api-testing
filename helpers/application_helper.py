@@ -18,6 +18,10 @@ def get_application(api_client, application_id, expected_status_code=200):
     get_application_endpoint = f"/api/v1/applications/{application_id}"
     return api_client.get_json(get_application_endpoint, expected_status_code=expected_status_code)
 
+def get_applications_list(api_client, expected_status_code=200):
+    get_application_endpoint = f"/api/v1/applications"
+    return api_client.get_json(get_application_endpoint, expected_status_code=expected_status_code)
+
 def delete_application(api_client, application_id, expected_status_code=204):
     delete_application_endpoint = f"/api/v1/applications/{application_id}"
     return api_client.delete(delete_application_endpoint, expected_status_code=expected_status_code)
