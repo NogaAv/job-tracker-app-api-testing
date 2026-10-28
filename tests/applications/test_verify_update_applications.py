@@ -1,6 +1,8 @@
+import pytest
 from clients.api_client import APIClient
 
 
+@pytest.mark.tcid("TC-008")
 def test_verify_user_can_update_application_status():
     """Verify that a user can update the status of an existing application."""
     # setup

@@ -1,31 +1,22 @@
-test_case_id,title,feature,priority,method,endpoint,auth_required,preconditions,steps,expected_result,automation_status
-TC-001,Verify public status endpoint returns app status,Public API,High,,/api/v1/public/status,,The app need to be running,Send a GET request to the endpoint,"Response status code should be: 200, and
-Response body includes apps status information: 
-Example:{
-  ""app_name"": ""string"",
-  ""api_version"": ""string"",
-  ""environment"": ""string"",
-  ""server_time"": ""2026-10-10T07:31:44.529Z""
-} 
-Concrete Example: {
-  ""app_name"": ""SuperSQA Job Tracker"",
-  ""api_version"": ""v1"",
-  ""environment"": ""local"",
-  ""server_time"": ""2026-10-10T07:31:44.512613Z""
-}",PENDING
-TC-002,Verify public demo-stats endpoint returns app demo stats,Public API,Medium,,/api/v1/public/demo-stats,,The app need to be running,Send a GET request to the endpoint,"Response status code should be: 200, ans 
-Response body is correct structured.
-Concrete Example:
-{
-  ""total_seeded_applications"": 4,
-  ""status_counts"": {
-    ""potential"": 2,
-    ""applied"": 1,
-    ""in_progress"": 1,
-    ""final_stage"": 0,
-    ""hired"": 0,
-    ""rejected"": 0,
-    ""withdrawn"": 0,
-    ""total"": 4
-  }
-}",PENDING
+﻿"test_case_id","title","feature","priority","method","endpoint","auth_required","preconditions","steps","expected_result","automation_status"
+"TC-001","Verify public status endpoint returns the app metadata","Public API","High","GET","/api/v1/public/status","No","The application is running.","1. Send a GET request to /api/v1/public/status without authentication.;2. Read the response body.;3. Validate the response fields and types.","Response status is 200 and the JSON contains app_name, api_version, environment, and server_time with valid values.","AUTOMATED"
+"TC-002","Verify public demo-stats endpoint returns seeded totals","Public API","Medium","GET","/api/v1/public/demo-stats","No","The application is running and seeded data is available.","1. Send a GET request to /api/v1/public/demo-stats without authentication.;2. Read the response body.;3. Check the totals and status counts structure.","Response status is 200 and the body includes total_seeded_applications and status_counts with integer values for each status bucket.","AUTOMATED"
+"TC-003","Verify user can log in with valid credentials","Authentication","High","POST","/api/v1/auth/login","No","The app is running and the test user exists with valid credentials.","1. Submit a POST request to /api/v1/auth/login with a valid email and password.;2. Capture the response payload.;3. Validate the token and user profile data.","Response status is 200 and the response includes a non-empty access_token, token_type, expires_in, and a valid user object.","AUTOMATED"
+"TC-004","Verify user cannot log in with invalid credentials","Authentication","High","POST","/api/v1/auth/login","No","The app is running and the user exists with a known incorrect password.","1. Submit a POST request to /api/v1/auth/login with a valid email and an invalid password.;2. Capture the error response.;3. Validate the error structure.","Response status is 401 and the error payload contains code INVALID_CREDENTIALS, message Invalid email or password, and an empty details array.","AUTOMATED"
+"TC-005","Verify authenticated user can create an application","Applications","High","POST","/api/v1/applications","Yes","The user is authenticated and has permission to create applications.","1. Build a valid application payload.;2. Send a POST request to /api/v1/applications.;3. Read the created application response.;4. Fetch the application by ID to confirm it persisted.","Response status is 201 and the returned object includes the expected application fields with values matching the request payload.","AUTOMATED"
+"TC-006","Verify authenticated user can get the applications list","Applications","High","GET","/api/v1/applications","Yes","The user is authenticated and the application list is available.","1. Send a GET request to /api/v1/applications with the user token.;2. Read the response body.;3. Confirm it returns an array of application records.","Response status is 200 and the payload is a list of application objects.","AUTOMATED"
+"TC-007","Verify authenticated user can access the application summary","Applications Summary","High","GET","/api/v1/applications/summary","Yes","The user is authenticated and application data exists in the database.","1. Send a GET request to /api/v1/applications/summary.;2. Read the response body.;3. Validate the summary values and total calculation.","Response status is 200 and the summary includes integer totals for all application states whose total equals the sum of all status counts.","AUTOMATED"
+"TC-008","Verify authenticated user can update an application status","Applications","High","PATCH","/api/v1/applications/{id}","Yes","An application exists and the user is authenticated.","1. Create an application with an initial status.;2. Send a PATCH request to /api/v1/applications/{id} with a new status.;3. Fetch the application again and confirm the change persisted.","Response status is 200 and the application status matches the updated value after the patch and on a subsequent GET.","AUTOMATED"
+"TC-009","Verify authenticated user can update an application notes field","Applications","Medium","PATCH","/api/v1/applications/{id}","Yes","An application exists and the user is authenticated.","1. Create or fetch an application.;2. Send a PATCH request updating notes.;3. Fetch the application again to confirm the new notes are saved.","Response status is 200 and the notes field changes to the new value and persists in the stored record.","AUTOMATED"
+"TC-010","Verify authenticated user can update an application remote type","Applications","Medium","PATCH","/api/v1/applications/{id}","Yes","An application exists and the user is authenticated.","1. Create an application with an initial remote_type value.;2. Send a PATCH request changing remote_type.;3. Fetch the application again to verify the update persisted.","Response status is 200 and remote_type reflects the new value after the update.","AUTOMATED"
+"TC-011","Verify authenticated user can update an application salary range","Applications","Medium","PATCH","/api/v1/applications/{id}","Yes","An application exists and the user is authenticated.","1. Create an application with an initial salary_range value.;2. Send a PATCH request updating salary_range.;3. Fetch the application again to confirm the saved value changed.","Response status is 200 and salary_range matches the new value persisted in the application record.","AUTOMATED"
+"TC-012","Verify authenticated user can delete an application","Applications","High","DELETE","/api/v1/applications/{id}","Yes","An application exists and the user is authenticated.","1. Create an application.;2. Send a DELETE request to the application endpoint.;3. Try to fetch the deleted application.","Response status is 204 on delete and a subsequent GET returns 404 for the same application ID.","AUTOMATED"
+"TC-013","Verify creating an application writes a created audit log","Audit Logs","High","POST","/api/v1/applications","Yes","The user is authenticated and the database is accessible.","1. Create a new application through the API.;2. Query the application_audit_logs table by application_id.;3. Read the most recent log entry.","A created audit record exists for the application and contains the application_id, action created, and a valid user_id.","AUTOMATED"
+"TC-014","Verify updating an application writes an updated audit log","Audit Logs","High","PATCH","/api/v1/applications/{id}","Yes","An application exists, and audit logging is enabled.","1. Create an application.;2. Update the status to a new value.;3. Query the application_audit_logs table for the latest record.","A new audit row is created with action updated, the previous status in old_status, and the new status in new_status.","AUTOMATED"
+"TC-015","Verify deleting an application writes a deleted audit log","Audit Logs","High","DELETE","/api/v1/applications/{id}","Yes","An application exists and the user is authenticated.","1. Create an application.;2. Delete the application via the API.;3. Query the application_audit_logs table for the last log entry.","A deleted audit row exists for the application with action deleted, old_status equal to the original value, and new_status null.","AUTOMATED"
+"TC-016","Verify create application validation requires company_name","Negative Validation","High","POST","/api/v1/applications","Yes","The user is authenticated and a valid payload is available.","1. Create a payload missing company_name.;2. Send the POST request to /api/v1/applications.;3. Inspect the validation error.","Response status is 422 and the error response identifies company_name as a missing field in the validation details.","AUTOMATED"
+"TC-017","Verify create application validation rejects invalid status values","Negative Validation","High","POST","/api/v1/applications","Yes","The user is authenticated and a valid payload is available.","1. Create a payload with a non-supported status value.;2. Send the POST request to /api/v1/applications.;3. Inspect the validation error.","Response status is 422 and the error response identifies status as an invalid field in the validation details.","AUTOMATED"
+"TC-018","Verify get application returns 404 for a non-existing application","Negative Validation","Medium","GET","/api/v1/applications/{id}","Yes","The user is authenticated and the application ID does not exist.","1. Send a GET request to /api/v1/applications/99999999.;2. Read the response body.;3. Validate the error payload.","Response status is 404 and the error includes code NOT_FOUND, message Application not found, and an empty details array.","AUTOMATED"
+"TC-019","Verify applications list rejects requests without authentication","Negative Validation","High","GET","/api/v1/applications","No","The app is running and no valid user token is provided.","1. Create an unauthenticated client.;2. Send a GET request to /api/v1/applications.;3. Inspect the response.","Response status is 401 and the error indicates authentication is required with an empty details array.","AUTOMATED"
+"TC-020","Verify API key is stored as a hash, not as plain text","Security","High","POST","/api/v1/api-keys","Yes","The user is authenticated and API key creation is enabled.","1. Create a new API key through the API.;2. Capture the returned key and key prefix.;3. Query the api_keys table in the database.","The returned key starts with jt_live_ and the database stores hashed_key instead of the raw API key while keeping the expected key_prefix.","AUTOMATED"
+

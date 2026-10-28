@@ -1,7 +1,9 @@
+import pytest
 from clients.api_client import APIClient
 from clients.sql_client import SQLClient
 
 
+@pytest.mark.tcid("TC-015")
 def test_verify_delete_application_writes_to_audit_logs():
     """
     Verify deleting an application records a ``deleted`` audit log via SQLClient.

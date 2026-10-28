@@ -1,10 +1,10 @@
+import pytest
 import requests
 
 from clients.api_client import APIClient
-from configs.settings import BASE_URL
-from tests.auth.test_verify_login import api_client
+import pytest
 
-
+@pytest.mark.tcid("TC-002")
 def test_verify_public_demo_stats_endpoint():
     """Verify the public demo stats endpoint returns seeded totals and status counts."""
     # make the call to the public demo stats endpoint

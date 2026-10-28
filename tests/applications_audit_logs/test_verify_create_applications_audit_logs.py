@@ -1,7 +1,9 @@
+import pytest
 from clients.api_client import APIClient
 from clients.sql_client import SQLClient
 
 
+@pytest.mark.tcid("TC-013")
 def test_verify_create_application_writes_to_audit_logs():
     """
     Verify creating an application records a ``created`` audit log via SQLClient.

@@ -1,0 +1,24 @@
+Command run:
+C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing\.venv\Scripts\python.exe -m pytest --tcid TC-001 --junitxml C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing\reports\20261022_130727_341550\junit.xml
+
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.14.7', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.6.0'}, 'Plugins': {'html': '4.2.0', 'metadata': '3.1.1'}, 'JAVA_HOME': 'C:\\Users\\noga0\\scoop\\apps\\openjdk8-redhat\\current'}
+rootdir: C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing
+configfile: pytest.ini
+plugins: html-4.2.0, metadata-3.1.1
+collecting ... 
+----------------------------- live log collection -----------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+collected 20 items / 19 deselected / 1 selected
+
+tests/public/test_verify_public_status_endpoint.py::test_verify_public_status_endpoint PASSED
+
+- generated xml file: C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing\reports\20261022_130727_341550\junit.xml -
+====================== 1 passed, 19 deselected in 6.43s =======================

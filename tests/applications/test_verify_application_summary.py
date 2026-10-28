@@ -1,7 +1,9 @@
 
+import pytest
 from clients.api_client import APIClient
 
 
+@pytest.mark.tcid("TC-007")
 def test_verify_authenticated_user_can_access_application_summary():
     """Verify the authenticated applications summary response has valid totals."""
 

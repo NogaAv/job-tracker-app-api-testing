@@ -1,10 +1,12 @@
 from xmlrpc.client import DateTime
 
+import pytest
 import requests
 
 from clients.api_client import APIClient
 from configs.settings import BASE_URL
 
+@pytest.mark.tcid("TC-001")
 def test_verify_public_status_endpoint():
     """Verify the public status endpoint exposes the expected app metadata."""
     # make the call to the public status endpoint
