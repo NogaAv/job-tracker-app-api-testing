@@ -1,0 +1,114 @@
+Command run:
+C:\Users\noga0\AppData\Local\Programs\Python\Python314\python.exe -m pytest --junitxml C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing\reports\20261022_130941_327620\junit.xml
+
+============================= test session starts =============================
+platform win32 -- Python 3.14.7, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\noga0\AppData\Local\Programs\Python\Python314\python.exe
+cachedir: .pytest_cache
+metadata: {'Python': '3.14.7', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.1.1', 'pluggy': '1.6.0'}, 'Plugins': {'base-url': '2.1.0', 'bdd': '8.1.0', 'cov': '7.1.0', 'html': '4.2.0', 'metadata': '3.1.1', 'playwright': '0.9.0', 'xdist': '3.8.0'}, 'JAVA_HOME': 'C:\\Users\\noga0\\scoop\\apps\\openjdk8-redhat\\current', 'Base URL': ''}
+rootdir: C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing
+configfile: pytest.ini
+plugins: base-url-2.1.0, bdd-8.1.0, cov-7.1.0, html-4.2.0, metadata-3.1.1, playwright-0.9.0, xdist-3.8.0
+collecting ... 
+----------------------------- live log collection -----------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+collected 20 items
+
+tests/api_keys/test_verify_api_key_storage.py::test_verify_api_key_is_not_stored_as_plain_text 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications/test_verify_application_summary.py::test_verify_authenticated_user_can_access_application_summary 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications/test_verify_create_applications.py::test_verify_user_can_create_application 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications/test_verify_delete_applications.py::test_verify_user_can_delete_application 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications/test_verify_get_applications.py::test_verify_authenticated_user_can_get_applications 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications/test_verify_update_applications.py::test_verify_user_can_update_application_status 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+INFO     clients.api_client:api_client.py:155 PATCH http://localhost:3050/api/v1/applications/20 -> 200
+PASSED
+tests/applications/test_verify_update_applications_fields.py::test_verify_user_can_update_applications_notes 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:155 PATCH http://localhost:3050/api/v1/applications/20 -> 200
+PASSED
+tests/applications/test_verify_update_applications_fields.py::test_verify_user_can_update_application_remote_type 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:155 PATCH http://localhost:3050/api/v1/applications/20 -> 200
+PASSED
+tests/applications/test_verify_update_applications_fields.py::test_verify_user_can_update_application_salary_range 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:155 PATCH http://localhost:3050/api/v1/applications/20 -> 200
+PASSED
+tests/applications_audit_logs/test_verift_update_applications_audit_logs.py::test_verify_update_applications_audit_logs 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+INFO     clients.api_client:api_client.py:155 PATCH http://localhost:3050/api/v1/applications/20 -> 200
+PASSED
+tests/applications_audit_logs/test_verify_create_applications_audit_logs.py::test_verify_create_application_writes_to_audit_logs 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications_audit_logs/test_verify_delete_applications_audit_logs.py::test_verify_delete_application_writes_to_audit_logs 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications_negative/test_application_negative_validation.py::test_verify_create_application_required_company_name 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications_negative/test_application_negative_validation.py::test_verify_create_application_rejects_invalid_status 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications_negative/test_application_negative_validation.py::test_verify_get_nonexisting_application_returns_not_found 
+-------------------------------- live log call --------------------------------
+INFO     clients.api_client:api_client.py:40 Authenticating API client for student@example.com
+INFO     clients.api_client:api_client.py:64 Logging in user student@example.com
+INFO     clients.api_client:api_client.py:70 Login successful for student@example.com
+PASSED
+tests/applications_negative/test_application_negative_validation.py::test_verify_applications_list_requires_authentication PASSED
+tests/auth/test_verify_login.py::test_verify_user_can_login_with_valid_credentials PASSED
+tests/auth/test_verify_login.py::test_verify_user_cannot_login_with_invalid_credentials PASSED
+tests/public/test_verify_public_demo_stats.py::test_verify_public_demo_stats_endpoint PASSED
+tests/public/test_verify_public_status_endpoint.py::test_verify_public_status_endpoint PASSED
+
+- generated xml file: C:\Users\noga0\Dev\Automation\UDEMY\API_Testing_with_Python_PyTest_and_AI_Assisted_Automation\api-testing-course-2026-materials\course-code\My-Project\job-tracker-app-api-testing\reports\20261022_130941_327620\junit.xml -
+======================= 20 passed in 111.01s (0:01:51) ========================

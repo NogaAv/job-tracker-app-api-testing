@@ -1,9 +1,11 @@
+import pytest
 from clients.api_client import APIClient
 from helpers.application_helper import create_application, get_application, delete_application, \
     build_create_application_payload
 
 api_client = APIClient()
 
+@pytest.mark.tcid("TC-009")
 def test_verify_user_can_update_applications_notes():
     """Verify that a user can update the notes of an existing application."""
     # setup: create an application with the default payload
@@ -31,6 +33,7 @@ def test_verify_user_can_update_applications_notes():
     delete_application(api_client, application_id)
 
 
+@pytest.mark.tcid("TC-010")
 def test_verify_user_can_update_application_remote_type():
 
     old_remote_type = "on_site"
@@ -59,6 +62,7 @@ def test_verify_user_can_update_application_remote_type():
     # delete the application created for the test
     delete_application(api_client, application_id)
 
+@pytest.mark.tcid("TC-011")
 def test_verify_user_can_update_application_salary_range():
 
     old_salary_range = "$200k - $350k"

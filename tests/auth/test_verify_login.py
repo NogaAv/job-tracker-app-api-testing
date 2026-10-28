@@ -1,9 +1,11 @@
+import pytest
 from clients.api_client import APIClient
 
 
 api_client = APIClient()
 
 
+@pytest.mark.tcid("TC-003")
 def test_verify_user_can_login_with_valid_credentials():
     """Verify valid credentials return a bearer token and user profile."""
 
@@ -27,6 +29,7 @@ def test_verify_user_can_login_with_valid_credentials():
     assert response_body["user"]["updated_at"], f"User updated at is required, but got {response_body['user']['updated_at']}"
 
 
+@pytest.mark.tcid("TC-004")
 def test_verify_user_cannot_login_with_invalid_credentials():
     """Verify invalid credentials return a 401 error with the expected payload."""
 

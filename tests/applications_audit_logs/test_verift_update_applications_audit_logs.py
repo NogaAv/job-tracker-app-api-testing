@@ -1,7 +1,9 @@
+import pytest
 from clients.api_client import APIClient
 from clients.sql_client import SQLClient
 
 
+@pytest.mark.tcid("TC-014")
 def test_verify_update_applications_audit_logs():
     """
     Verify that updating an application creates an audit log entry.

@@ -1,9 +1,11 @@
+import pytest
 from clients.api_client import APIClient
 from helpers.application_helper import build_create_application_payload, create_application, delete_application, \
     get_application, get_applications_list
 from helpers.error_helper import verify_error_response
 
 
+@pytest.mark.tcid("TC-016")
 def test_verify_create_application_required_company_name():
 
     api_client = APIClient()
@@ -21,6 +23,7 @@ def test_verify_create_application_required_company_name():
     assert "company_name" in response_json["error"]["details"][0]["loc"]
 
 
+@pytest.mark.tcid("TC-017")
 def test_verify_create_application_rejects_invalid_status():
     api_client = APIClient()
     # create application with invalid status
@@ -35,6 +38,7 @@ def test_verify_create_application_rejects_invalid_status():
     assert "status" in response_json["error"]["details"][0]["loc"]
 
 
+@pytest.mark.tcid("TC-018")
 def test_verify_get_nonexisting_application_returns_not_found():
     api_client = APIClient()
     nonexisting_app_id = 99999999
@@ -47,6 +51,7 @@ def test_verify_get_nonexisting_application_returns_not_found():
     assert response_json["error"]["details"] == []
 
 
+@pytest.mark.tcid("TC-019")
 def test_verify_applications_list_requires_authentication():
 
     # create unauthenticated client

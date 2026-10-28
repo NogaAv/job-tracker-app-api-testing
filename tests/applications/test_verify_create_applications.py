@@ -1,6 +1,8 @@
+import pytest
 from clients.api_client import APIClient
 
 
+@pytest.mark.tcid("TC-005")
 def test_verify_user_can_create_application():
     """Verify an authenticated user can create a new application."""
     # create a payload with the token in the header
