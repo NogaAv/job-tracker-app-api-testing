@@ -17,8 +17,18 @@ jobs:
     steps:
       # Step 1: Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
 
       # Step 2: Run a simple command
       - name: Run a simple command
         run: echo "Hello, this is a dummy job running on GitHub Actions!"
+
+  my-job-2:
+      name: My second dummy job
+      runs-on: ubuntu-latest
+      steps:
+          - name: my second step
+            uses: actions/checkout@v5
+
+          - name: my second step
+            run: echo "This is my second print message"
